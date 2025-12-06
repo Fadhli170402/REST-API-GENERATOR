@@ -14,7 +14,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Database Connection
-mongoose.connect(`mongodb://localhost:27017/${env.DB_NAME}`)
+mongoose.connect(`mongodb://localhost:27017/${env.DB_NAME}`,{
+    'AuthSource': 'admin',
+    'user': env.DB_USERNAME,
+    'pass': env.DB_PASSWORD,
+})
 
 const db = mongoose.connection;
 db.on('error', (err) => {
